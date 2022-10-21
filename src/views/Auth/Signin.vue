@@ -86,6 +86,7 @@ import Navbar from "@/examples/PageLayout/Navbar.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonSwitch from "@/components/ArgonSwitch.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
+import { isNavigationFailure, NavigationFailureType } from 'vue-router'
 const body = document.getElementsByTagName("body")[0];
 
 export default {
@@ -107,7 +108,7 @@ export default {
     ...mapActions(d$auth, ['a$login']),
     async submitLogin(){
       try {
-        await this.a$login({ ...this.input }); 
+        await this.a$login({ ...this.input });
         this.$router.replace({name: 'Default'});
       } catch (e) {
         console.error(e);
