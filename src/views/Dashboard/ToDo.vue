@@ -1,7 +1,6 @@
 <script>
 import { mapActions, mapState } from 'pinia';
-import d$todo from '@/stores/dashboard/todo'
-import axios from 'axios';
+import d$todo from '@/stores/dashboard/todo';
 
 import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonSwitch from "@/components/ArgonSwitch.vue";
@@ -50,28 +49,27 @@ export default {
 
 <template>
 
-    <div class="page-header min-vh-100">
+    <div class="page-header min-vh-80">
         <div class="container">
             <div class="row">
-                <div class="mx-auto col-xl-4 col-lg-5 col-md-7 d-flex flex-column mx-lg-0">
-                    <div class="card card-plain">
+                <div class="card mx-auto col-xl-5 col-lg-5 col-md-7 d-flex flex-column mx-lg-0">
+                    <div class="card-plain">
                         <div class="pb-0 card-header text-start">
-                            <h4 class="font-weight-bolder">Add Todo</h4>
-                            <p class="mb-0">Masukkan todo</p>
+                            <h4 class="font-weight-bolder text-center">Add Todo</h4>
                         </div>
                         <div class="card-body">
                             <form @submit.prevent="addList">
                                 <div class="mb-3">
-                                    <argon-input v-model="input.name" type="text" placeholder="Name" name="name"
-                                        size="lg" />
+                                    <label for="name" class="fs-6" >Name</label>
+                                    <argon-input v-model="input.name" type="text" name="name" size="lg" />
                                 </div>
                                 <div class="mb-3">
-                                    <argon-input v-model="input.description" type="text" placeholder="Description"
-                                        name="description" size="lg" />
+                                <label for="description" class="fs-6" >Description</label>
+                                    <argon-input v-model="input.description" type="text" name="description" size="lg" />
                                 </div>
                                 <div class="mb-3">
-                                    <argon-input v-model="input.category" type="text" placeholder="Category"
-                                        name="category" size="lg" />
+                                    <label for="category" class="fs-6" >Category</label>
+                                    <argon-input v-model="input.category" type="text" name="category" size="lg" />
                                 </div>
                                 <div class="text-center">
                                     <argon-button class="mt-4" variant="gradient" color="success" fullWidth size="lg"
@@ -85,13 +83,6 @@ export default {
                 </div>
             </div>
         </div>
-    </div>
-
-
-    <div>
-        <ol>
-            <li v-for="(item, index) in g$list" :key="index">{{ item }}</li>
-        </ol>
     </div>
 </template>
 
