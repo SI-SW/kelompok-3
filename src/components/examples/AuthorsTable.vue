@@ -140,7 +140,7 @@ export default {
   font-weight: bold;
 }
 .bi-pencil-square {
-  color: rgb(43, 86, 226);
+  color: #0d6efd;
 }
 .bi-trash3-fill {
   color: red;
