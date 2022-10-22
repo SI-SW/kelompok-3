@@ -80,13 +80,10 @@
 <script>
 import { mapActions } from 'pinia';
 import d$auth from '@/stores/auth';
-// import {mapActions} from 'pinia';
-// import  d$auth from '@/stores/auth';
 import Navbar from "@/examples/PageLayout/Navbar.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonSwitch from "@/components/ArgonSwitch.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
-import { isNavigationFailure, NavigationFailureType } from 'vue-router'
 const body = document.getElementsByTagName("body")[0];
 
 export default {
