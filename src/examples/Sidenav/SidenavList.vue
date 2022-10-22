@@ -58,23 +58,11 @@
         </sidenav-item>
       </li>
       <li class="nav-item">
-        <sidenav-item url="/auth/signin" :class="getRoute() === 'signin' ? 'active' : ''" :navText="this.$store.state.isRTL ? 'تسجيل الدخول' : 'Sign In'">
+        <sidenav-item url="/auth/signin" @click="logout" :navText="this.$store.state.isRTL ? 'اشتراك' : 'Logout'">
           <template v-slot:icon>
-            <i class="ni ni-single-copy-04 text-danger text-sm opacity-10"></i>
+            <i class="fa fa-sign-out text-danger text-sm opacity-10"></i>
           </template>
         </sidenav-item>
-      </li>
-      <li class="nav-item">
-        <sidenav-item url="/auth/signup" :class="getRoute() === 'signup' ? 'active' : ''" :navText="this.$store.state.isRTL ? 'اشتراك' : 'Sign Up'">
-          <template v-slot:icon>
-            <i class="ni ni-collection text-info text-sm opacity-10"></i>
-          </template>
-        </sidenav-item>
-      </li>
-      <li>
-        <div>
-          <button @click="logout">logout</button>
-        </div>
       </li>
     </ul>
   </div>
