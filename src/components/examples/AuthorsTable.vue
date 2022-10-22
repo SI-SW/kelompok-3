@@ -101,7 +101,7 @@ export default {
                 <router-link :to="{name: 'ToDoEdit', params: {id: item.id}}">
                   <a><i class="bi bi-pencil-square"></i></a>
                 </router-link> |
-                <button @click.prevent="delData(item.id)"><i class="bi bi-trash3-fill"></i></button>
+                <a @click.prevent="delData(item.id)"><i class="bi bi-trash3-fill"></i></a>
               </td>
               <td v-if="item.status == 'todo'">
                 <div class="d-flex px-2 py-1">
@@ -126,7 +126,7 @@ export default {
                 <router-link :to="{name: 'ToDoEdit', params: {id: item.id}}">
                   <a><i class="bi bi-pencil-square"></i></a>
                 </router-link> | 
-                <button @click.prevent="delData(item.id)"><i class="bi bi-trash3-fill"></i></button>
+                <a @click.prevent="delData(item.id)"><i class="bi bi-trash3-fill"></i></a>
               </td>
             </tr>
           </tbody>

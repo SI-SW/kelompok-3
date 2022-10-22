@@ -41,8 +41,11 @@ export default {
             try {
                 const id = this.$route.params.id;
 
-                await this.a$edit(id, {...this.input });
-                this.$router.replace({ name: 'Tables' });
+                if (confirm("are you sure to edit this data?") == true) {
+                    alert("data edit successfully");
+                    await this.a$edit(id, {...this.input });
+                    this.$router.replace({ name: 'Tables' });
+                }
             } catch (e) {
                 console.error('methods editList error', e);
             }
