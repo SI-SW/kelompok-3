@@ -13,8 +13,7 @@ export default {
         input: {
             name: '',
             description: '',
-            category: '',
-            status: 'todo',
+            status: '',
         },
     }),
     components: {
@@ -30,8 +29,10 @@ export default {
         async getListDetail() {
             try {
                 const id = this.$route.params.id;
-
                 await this.a$detail(id);
+                this.input.name = this.g$detail.name;
+                this.input.description = this.g$detail.description;
+                this.input.status = this.g$detail.status;
             } catch (e) {
                 console.error('methods getDetail error', e);
             }
@@ -41,7 +42,7 @@ export default {
                 const id = this.$route.params.id;
 
                 await this.a$edit(id, {...this.input });
-                this.$router.go(this.$router.currentRoute)
+                this.$router.replace({ name: 'Tables' });
             } catch (e) {
                 console.error('methods editList error', e);
             }
@@ -54,7 +55,6 @@ export default {
 </script>
 
 <template>
-
     <div class="page-header min-vh-80">
         <div class="container">
             <div class="row">
@@ -73,10 +73,6 @@ export default {
                                     <label for="description" class="fs-6">Description</label>
                                     <argon-input v-model="input.description" type="text" name="description" size="lg" />
                                 </div>
-                                <!-- <div class="mb-3">
-                                    <label for="category" class="fs-6">Category</label>
-                                    <argon-input v-model="input.category" type="text" name="category" size="lg" />
-                                </div> -->
                                 <div class="mb-3">
                                     <label for="status" class="fs-6">Status</label>
                                     <select v-model="input.status" class="form-select" name="status">
