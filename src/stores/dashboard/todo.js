@@ -40,7 +40,15 @@ const d$todo = defineStore({
                 console.error('actions edit todo error', e);
                 throw e;
             }
-        }
+        },
+        async a$del(id) {
+            try {
+                await s$todo.del(id)
+            } catch (e) {
+                console.error('actions edit todo error', e);
+                throw e;
+            }
+        },
     },
     getters: {
         g$list: ({ list }) => list,

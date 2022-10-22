@@ -15,7 +15,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(d$todo, ["a$list", "a$add"]),
+    ...mapActions(d$todo, ["a$list", "a$add", "a$del"]),
     async getList() {
       try {
         await this.a$list();
@@ -26,6 +26,19 @@ export default {
 
     addData() {
       this.$router.replace({ name: 'ToDo' });
+    },
+
+    async delData(id) {
+      try {
+        if (confirm("are you sure to delete this data?") == true) {
+          alert("data deleted successfully");
+          await this.a$del(id);
+          
+          this.$router.go(this.$router.currentRoute);
+        } 
+      } catch (error) {
+        console.error("methods delData error", error);
+      }
     },
 
     dateTime(value) {
@@ -43,7 +56,7 @@ export default {
     <div class="card-header pb-0">
       <h5 class="table-name">All Data</h5>
     </div>
-    <div class="card-body px-0 pt-0 pb-2">
+    <div class="card-body px-0 pt-0 pb-2 m-4">
       <div class="row">
         <div class="col-2 text-end">
           <argon-button @click="addData" color="success" variant="gradient">
@@ -88,7 +101,7 @@ export default {
                 <router-link :to="{name: 'ToDoEdit', params: {id: item.id}}">
                   <a><i class="bi bi-pencil-square"></i></a>
                 </router-link> |
-                <a><i class="bi bi-trash3-fill"></i></a>
+                <button @click.prevent="delData(item.id)"><i class="bi bi-trash3-fill"></i></button>
               </td>
               <td v-if="item.status == 'todo'">
                 <div class="d-flex px-2 py-1">
@@ -113,8 +126,7 @@ export default {
                 <router-link :to="{name: 'ToDoEdit', params: {id: item.id}}">
                   <a><i class="bi bi-pencil-square"></i></a>
                 </router-link> | 
-                <!-- <a><i class="bi bi-pencil-square"></i></a> | -->
-                <a><i class="bi bi-trash3-fill"></i></a>
+                <button @click.prevent="delData(item.id)"><i class="bi bi-trash3-fill"></i></button>
               </td>
             </tr>
           </tbody>
