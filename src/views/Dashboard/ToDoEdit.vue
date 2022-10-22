@@ -1,5 +1,6 @@
 <script>
 import { mapActions, mapState } from 'pinia';
+
 import d$todo from '@/stores/dashboard/todo';
 
 import ArgonInput from "@/components/ArgonInput.vue";
@@ -7,12 +8,13 @@ import ArgonSwitch from "@/components/ArgonSwitch.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
 
 export default {
-    name: 'ToDo',
+    name: 'ToDoEdit',
     data: () => ({
         input: {
             name: '',
             description: '',
             category: '',
+            status: 'todo',
         },
     }),
     components: {
@@ -21,28 +23,32 @@ export default {
         ArgonButton,
     },
     computed: {
-        ...mapState(d$todo, ['g$list']),
+        ...mapState(d$todo, ['g$detail']),
     },
     methods: {
-        ...mapActions(d$todo, ["a$list", "a$add"]),
-        async getList() {
+        ...mapActions(d$todo, ["a$detail", "a$edit"]),
+        async getListDetail() {
             try {
-                await this.a$list();
+                const id = this.$route.params.id;
+
+                await this.a$detail(id);
             } catch (e) {
-                console.error('methods getList error', e);
+                console.error('methods getDetail error', e);
             }
         },
-        async addList() {
+        async editList() {
             try {
-                await this.a$add({ ...this.input });
+                const id = this.$route.params.id;
+
+                await this.a$edit(id, {...this.input });
                 this.$router.go(this.$router.currentRoute)
             } catch (e) {
-                console.error('methods addList error', e);
+                console.error('methods editList error', e);
             }
         },
     },
     async created() {
-        await this.getList();
+        await this.getListDetail();
     },
 };
 </script>
@@ -55,21 +61,28 @@ export default {
                 <div class="card mx-auto col-xl-5 col-lg-5 col-md-7 d-flex flex-column mx-lg-0">
                     <div class="card-plain">
                         <div class="pb-0 card-header text-start">
-                            <h4 class="font-weight-bolder text-center">Add Todo</h4>
+                            <h4 class="font-weight-bolder text-center">Edit Todo</h4>
                         </div>
                         <div class="card-body">
-                            <form @submit.prevent="addList">
+                            <form @submit.prevent="editList">
                                 <div class="mb-3">
-                                    <label for="name" class="fs-6" >Name</label>
+                                    <label for="name" class="fs-6">Name</label>
                                     <argon-input v-model="input.name" type="text" name="name" size="lg" />
                                 </div>
                                 <div class="mb-3">
-                                <label for="description" class="fs-6" >Description</label>
+                                    <label for="description" class="fs-6">Description</label>
                                     <argon-input v-model="input.description" type="text" name="description" size="lg" />
                                 </div>
-                                <div class="mb-3">
-                                    <label for="category" class="fs-6" >Category</label>
+                                <!-- <div class="mb-3">
+                                    <label for="category" class="fs-6">Category</label>
                                     <argon-input v-model="input.category" type="text" name="category" size="lg" />
+                                </div> -->
+                                <div class="mb-3">
+                                    <label for="status" class="fs-6">Status</label>
+                                    <select v-model="input.status" class="form-select" name="status">
+                                        <option selected value="todo">Todo</option>
+                                        <option value="done">Done</option>
+                                    </select>
                                 </div>
                                 <div class="text-center">
                                     <argon-button class="mt-4" variant="gradient" color="success" fullWidth size="lg"
