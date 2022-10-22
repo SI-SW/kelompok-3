@@ -35,7 +35,7 @@ export default {
         async addList() {
             try {
                 await this.a$add({ ...this.input });
-                this.$router.go(this.$router.currentRoute)
+                this.$router.replace({ name: 'Tables' });
             } catch (e) {
                 console.error('methods addList error', e);
             }
@@ -68,8 +68,11 @@ export default {
                                     <argon-input v-model="input.description" type="text" name="description" size="lg" />
                                 </div>
                                 <div class="mb-3">
-                                    <label for="category" class="fs-6" >Category</label>
-                                    <argon-input v-model="input.category" type="text" name="category" size="lg" />
+                                    <label for="category" class="fs-6" >Status</label>
+                                    <select v-model="input.status" class="form-select" name="status">
+                                        <option selected value="todo">Todo</option>
+                                        <option value="done">Done</option>
+                                    </select>
                                 </div>
                                 <div class="text-center">
                                     <argon-button class="mt-4" variant="gradient" color="success" fullWidth size="lg"
