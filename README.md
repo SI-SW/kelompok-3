@@ -207,4 +207,4 @@ Instagram: <https://instagram.com/creativetimofficial>
 We are open for contribution. Follow [this](https://github.com/SI-SW/kelompok-3/blob/4468b81730d7b4772c4dce6130d47bb27960f4e6/CONTRIBUTING.md)
 
 ## See the result here
-[this](https://kelompok3-si-sw.vercel.app/)
+Klick here [kelompok3-si-sw.vercel.app](https://kelompok3-si-sw.vercel.app/)
