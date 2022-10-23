@@ -8,8 +8,18 @@ const d$auth = defineStore({
     id: undefined,
     name: undefined,
     role: undefined,
+    list: [],
   }),
   actions: {
+    async a$register(body) {
+      try {
+        const { data } = await s$auth.register(body);
+        this.list = data;
+      } catch (e) {
+        console.error("actions todo list error", e);
+        throw e;
+      }
+    },
     async a$setUser() {
       try {
         const { id, name, role } = certCookies();
